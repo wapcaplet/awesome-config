@@ -1,8 +1,7 @@
 require("awful")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-layouts =
-{
+layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.max,
@@ -16,6 +15,6 @@ layouts =
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.magnifier
 }
--- }}}
 
 return layouts
+
