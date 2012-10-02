@@ -9,14 +9,16 @@ require("vicious")
 -- Load Debian menu entries
 require("debian.menu")
 
+beautiful.init(awful.util.getdir('config') .. "/theme.lua")
+
 -- Load custom modules
 require("layouts")
 require("tags")
 require("keys")
 require("terminal")
+require("rules")
 require("signals")
 
-beautiful.init(awful.util.getdir('config') .. "/theme.lua")
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -131,10 +133,9 @@ for s = 1, screen.count() do
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        mytextclock,
-        -- netwidget,
-        memwidget,
-        cpuwidget,
+        s == 1 and mytextclock or nil,
+        s == 1 and memwidget or nil,
+        s == 1 and cpuwidget or nil,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
