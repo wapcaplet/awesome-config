@@ -1,5 +1,3 @@
-config = require_by_host("config")
-config.terminal = "x-terminal-emulator"
 
 require("awful")
 require("awful.autofocus")
@@ -15,42 +13,38 @@ require("debian.menu")
 require("layouts")
 require("tags")
 require("keys")
+require("terminal")
+require("signals")
 
 beautiful.init(awful.util.getdir('config') .. "/theme.lua")
-
-editor = os.getenv("EDITOR") or "editor"
-editor_cmd = terminal .. " -e " .. editor
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
    { "restart", awesome.restart },
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+mymainmenu = awful.menu({
+    items = {
+        { "awesome", myawesomemenu, beautiful.awesome_icon },
+        { "Debian", debian.menu.Debian_menu.Debian },
+        { "open terminal", terminal }
+    }
+})
 
-mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-                                     menu = mymainmenu })
+mylauncher = awful.widget.launcher({
+    image = image(beautiful.awesome_icon),
+    menu = mymainmenu }
+)
+
 -- }}}
 
 -- {{{ Wibox
--- Network usage
-netwidget = widget({ type = "textbox" })
--- vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393">${eth0 down_kb}</span> <span color="#7F9F7F">${eth0 up_kb}</span>', 3)
-vicious.register(netwidget, vicious.widgets.net, 'Net down:${eth0 down_kb} up:${eth0 up_kb}', 3)
--- Memory usage
-memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem, "Mem $1% ", 13)
--- CPU usage
-cpuwidget = widget({ type = "textbox" })
-vicious.register(cpuwidget, vicious.widgets.cpu, "CPU $1% ")
+
+memwidget = require("memwidget")
+cpuwidget = require("cpuwidget")
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
@@ -111,11 +105,13 @@ for s = 1, screen.count() do
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+    mylayoutbox[s]:buttons(
+        awful.util.table.join(
+        awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+        awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+        awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+        awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end))
+    )
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
 
@@ -136,8 +132,8 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
-        memwidget,
         -- netwidget,
+        memwidget,
         cpuwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
