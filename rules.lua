@@ -35,6 +35,15 @@ awful.rules.rules = {
     },
 
     {
+        rule = { class = "Skype", role = "ConversationsWindow" },
+        -- Always put Skype on screen 2, tag 4
+        properties = {
+            tag = tags[2][4]
+        },
+        callback = awful.client.setslave
+    },
+
+    {
         rule = { class = "Skype" },
         -- Always put Skype on screen 2, tag 4
         properties = {
