@@ -32,19 +32,19 @@ awful.rules.rules = {
     -- Skype
     {
         rule = { class = "Skype" },
-        properties = { tag = tags[2][3] },
+        properties = { tag = tags[2][2] },
         callback = function(c) awful.tag.incmwfact(-0.35) end
     },
     {
         rule = { class = "Skype", role = "ConversationsWindow" },
-        properties = { tag = tags[2][3] },
+        properties = { tag = tags[2][2] },
         callback = awful.client.setslave
     },
 
     -- LibreOffice
     {
         rule_any = { class = { "libreoffice-startcenter", "libreoffice-calc", "libreoffice-writer" } },
-        properties = { tag = tags[1][3] }
+        properties = { tag = tags[1][6] }
     },
 
     -- Graphics
