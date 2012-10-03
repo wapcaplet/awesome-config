@@ -3,6 +3,7 @@ require("terminal")
 
 tags = require("tags")
 layouts = require("layouts")
+promptbox = require("promptbox")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -60,12 +61,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "p",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "p",     function () promptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
+                  promptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
               end)

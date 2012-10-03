@@ -19,36 +19,52 @@ awful.rules.rules = {
         }
     },
 
+    -- Browsers
     {
-        rule = { class = "pinentry" },
-        properties = {
-            floating = true
-        }
+        rule = { class = "Firefox" },
+        callback = function(c) awful.client.movetotag(tags[mouse.screen][1], c) end
     },
-
     {
         rule = { class = "Google-chrome" },
-        -- Put Chrome on current screen, tag 1
-        callback = function(c)
-            awful.client.movetotag(tags[mouse.screen][1], c)
-        end
+        callback = function(c) awful.client.movetotag(tags[mouse.screen][1], c) end
     },
 
+    -- Skype
+    {
+        rule = { class = "Skype" },
+        properties = { tag = tags[2][3] },
+        callback = function(c) awful.tag.incmwfact(-0.35) end
+    },
     {
         rule = { class = "Skype", role = "ConversationsWindow" },
-        -- Always put Skype on screen 2, tag 4
-        properties = {
-            tag = tags[2][4]
-        },
+        properties = { tag = tags[2][3] },
         callback = awful.client.setslave
     },
 
+    -- LibreOffice
     {
-        rule = { class = "Skype" },
-        -- Always put Skype on screen 2, tag 4
-        properties = {
-            tag = tags[2][4]
-        }
+        rule_any = { class = { "libreoffice-startcenter", "libreoffice-calc", "libreoffice-writer" } },
+        properties = { tag = tags[1][3] }
+    },
+
+    -- Graphics
+    {
+        rule_any = { class = { "Blender", "Inkscape", "Gimp" } },
+        properties = { tag = tags[1][8] }
+    },
+
+    -- Gimp
+    {
+        rule = { class = "Gimp", role = "gimp-toolbox" },
+        properties = { tag = tags[1][8] },
+        callback = function(c)
+            awful.tag.incmwfact(-0.35)
+        end
+    },
+    {
+        rule = { class = "Gimp", role = "gimp-image-window" },
+        properties = { tag = tags[1][8] },
+        callback = awful.client.setslave
     },
 
     -- { rule = { class = "gimp" },
