@@ -13,7 +13,6 @@ require("keys")
 require("terminal")
 require("rules")
 require("signals")
-require("wibox")
 
 -- TODO: Figure out how to put this in a separate module
 local menu = require("menu")
@@ -32,25 +31,33 @@ systray = widget({ type = "systray" })
 
 -- Create a wibox for each screen and add it
 wibox = {}
-for s = 1, screen.count() do
-    -- Create the wibox
-    wibox[s] = awful.wibox({ position = "top", screen = s })
-    -- Add widgets to the wibox - order matters
-    wibox[s].widgets = {
-        {
-            menu,
-            taglist[s],
-            promptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
-        },
-        layoutbox[s],
-        s == 1 and textclock or nil,
-        s == 1 and memwidget or nil,
-        s == 1 and cpuwidget or nil,
-        s == 1 and systray or nil,
-        tasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
-    }
-end
+wibox[1] = awful.wibox({ position = "top", screen = 1 })
+wibox[1].widgets = {
+    {
+        menu,
+        taglist[1],
+        promptbox[1],
+        layout = awful.widget.layout.horizontal.leftright
+    },
+    layoutbox[1],
+    textclock,
+    systray,
+    cpuwidget,
+    memwidget,
+    tasklist[1],
+    layout = awful.widget.layout.horizontal.rightleft
+}
+
+wibox[2] = awful.wibox({ position = "top", screen = 2 })
+wibox[2].widgets = {
+    {
+        taglist[2],
+        promptbox[2],
+        layout = awful.widget.layout.horizontal.leftright
+    },
+    layoutbox[2],
+    tasklist[2],
+    layout = awful.widget.layout.horizontal.rightleft
+}
 
 require("startup")
