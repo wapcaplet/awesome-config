@@ -13,10 +13,10 @@ vicious.register(memgraph, vicious.widgets.mem, "$1", 3)
 return memgraph.widget
 --]]
 
---local memwidget = widget({ type = "textbox" })
---vicious.register(memwidget, vicious.widgets.mem, ' Mem <span color="#88AAFF">$1</span>% ')
---return memwidget
+local memwidget = widget({ type = "textbox" })
+vicious.register(memwidget, vicious.widgets.mem, ' Mem <span color="#88AAFF">$1</span>% ')
 
+--[[
 -- From http://jasonmaur.com/awesome-wm-widgets-configuration/
 -- RAM usage widget
 memwidget = awful.widget.progressbar()
@@ -38,6 +38,7 @@ vicious.register(
         return args[1]
     end, 13
 )
+--]]
 
 return memwidget
 

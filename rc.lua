@@ -22,6 +22,8 @@ local promptbox = require("promptbox")
 local layoutbox = require("layoutbox")
 local memwidget = require("memwidget")
 local cpuwidget = require("cpuwidget")
+local netwidget = require("netwidget")
+local separator = require("separator")
 
 -- Create a textclock widget
 textclock = awful.widget.textclock({ align = "right" })
@@ -42,8 +44,15 @@ wibox[1].widgets = {
     layoutbox[1],
     textclock,
     systray,
-    cpuwidget,
+
+    separator,
+    netwidget,
+    separator,
     memwidget,
+    separator,
+    cpuwidget,
+    separator,
+
     tasklist[1],
     layout = awful.widget.layout.horizontal.rightleft
 }

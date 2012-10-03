@@ -13,10 +13,10 @@ vicious.register(cpugraph, vicious.widgets.cpu, "$1", 3)
 return cpugraph.widget
 --]]
 
---local cpuwidget = widget({ type = "textbox" })
---vicious.register(cpuwidget, vicious.widgets.cpu, ' CPU <span color="#44DD44">$1</span>% ')
---return cpuwidget
+local cpuwidget = widget({ type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu, ' CPU <span color="#44DD44">$1</span>% ')
 
+--[[
 -- From http://jasonmaur.com/awesome-wm-widgets-configuration/
 -- CPU usage widget
 cpuwidget = awful.widget.graph()
@@ -36,6 +36,7 @@ vicious.register(
         return args[1]
     end
 )
+--]]
 
 return cpuwidget
 
