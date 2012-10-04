@@ -6,28 +6,30 @@ theme = {}
 
 theme.font          = "sans 8"
 
--- Backgrounds
+-- Normal
 theme.bg_normal          = "#222222"
+theme.fg_normal          = "#999999"
+theme.border_normal      = "#444444"
+theme.tasklist_normal    = "#aaaaaa"
+
 -- Focused
 theme.bg_focus           = "#535d6c"
 theme.tasklist_bg_focus  = "#535d6c"
+theme.fg_focus           = "#ffffff"
+theme.border_focus       = "#00ff00"
+
 -- Urgent
 theme.bg_urgent          = "#882222"
+theme.fg_urgent          = "#ffffff"
 theme.tasklist_bg_urgent = "#882222"
+
 -- Minimized
 theme.bg_minimize        = "#444444"
-
--- Foregrounds
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ffffff"
-theme.fg_minimize   = "#ffffff"
+theme.fg_minimize        = "#ffffff"
 
 -- Borders
-theme.border_width  = "1"
-theme.border_normal = "#444444"
-theme.border_focus  = "#00ff00"
-theme.border_marked = "#91231c"
+theme.border_width       = "1"
+theme.border_marked      = "#91231c"
 
 -- There are other variable sets
 -- overriding the default one when

@@ -45,13 +45,11 @@ wibox[1].widgets = {
     textclock,
     systray,
 
-    separator,
     netwidget,
     separator,
     memwidget,
     separator,
     cpuwidget,
-    separator,
 
     tasklist[1],
     layout = awful.widget.layout.horizontal.rightleft
